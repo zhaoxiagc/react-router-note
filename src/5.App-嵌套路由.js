@@ -1,7 +1,5 @@
 /* 
-404 路由配置：
-  场景：当所有的路径都没有匹配的时候显示
-  语法规则：在各级路由的最后添加 * 号路由作为兜底
+嵌套路由：
 
 */
 
@@ -11,7 +9,6 @@ import Layout from "./Layout";
 import Board from "./Board";
 import Article from "./Article";
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom'
-import NotFound from "./NotFound";
 
 
 function App() {
@@ -19,10 +16,13 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout/>}>
+          {/* 定义二级路由嵌套 */}
+          {/* 默认二级 添加 index 属性，把它自己的 path 干掉 */}
+          {/* <Route path="board" element={<Board/>}></Route> */}
+          <Route index element={<Board/>}></Route>
+          <Route path="article" element={<Article/>}></Route>
         </Route>
         <Route path="/logins" element={<Logins/>}></Route>
-        {/* 当所有的路径都没有匹配时，做兜底匹配显示，未找到 */}
-        <Route path="*" element={<NotFound/>}></Route>
       </Routes>
     </BrowserRouter>
   );
